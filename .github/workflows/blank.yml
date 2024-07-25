@@ -1,0 +1,26 @@
+name: Deployment 🚀
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+       ## Development Deployment
+       
+      - uses: chrnorm/deployment-action@v2
+        id: jira-deployment-development
+        name: Create GitHub deployment for webshop
+        with:
+          token: '${{ github.token }}'
+          environment: ${{ inputs.country }}-dev
+          initial-status: "in_progress"
+          description: "building webshop application"
+
+      - name: Update deployment status (success)
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: ${{ steps.jira-deployment-development.outputs.environment_url }}
+          deployment-id: ${{ steps.jira-deployment-development.outputs.deployment_id }}
+          state: 'success'

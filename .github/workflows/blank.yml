@@ -13,7 +13,7 @@ jobs:
         name: Create GitHub deployment for webshop
         with:
           token: '${{ github.token }}'
-          environment: ${{ inputs.country }}-dev
+          environment: environment-dev
           initial-status: "in_progress"
           description: "building webshop application"
 

@@ -42,5 +42,3 @@ jobs:
           environment-url: ${{ steps.jira-deployment-development.outputs.environment_url }}
           deployment-id: ${{ steps.jira-deployment-development.outputs.deployment_id }}
           state: 'success'
-          ref: '${{ inputs.branch }}'
-          sha: '${{ inputs.sha }}'

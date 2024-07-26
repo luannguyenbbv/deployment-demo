@@ -14,7 +14,8 @@ jobs:
         id: jira-deployment-development
         name: Create GitHub deployment for webshop
         with:
-          repo: luannguyenbbv/turbo-dollop
+          repo: turbo-dollop
+          owner: luannguyenbbv
           token: '${{ secrets.MY_PAT }}'
           environment: environment-dev
           initial-status: "in_progress"
@@ -23,7 +24,8 @@ jobs:
       - name: Update deployment status (success)
         uses: chrnorm/deployment-status@v2
         with:
-          repo: luannguyenbbv/turbo-dollop
+          repo: turbo-dollop
+          owner: luannguyenbbv
           token: '${{ secrets.MY_PAT }}'
           environment-url: ${{ steps.jira-deployment-development.outputs.environment_url }}
           deployment-id: ${{ steps.jira-deployment-development.outputs.deployment_id }}

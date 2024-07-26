@@ -1,6 +1,16 @@
 name: Deployment 🚀
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch for deployment'
+        required: true
+        default: ''
+      sha:
+        description: 'SHA for deployment'
+        required: false
+        default: ''
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,6 +30,8 @@ jobs:
           environment: environment-dev
           initial-status: "in_progress"
           description: "building webshop application"
+          ref: '${{ inputs.branch }}'
+          sha: '${{ inputs.sha }}'
 
       - name: Update deployment status (success)
         uses: chrnorm/deployment-status@v2
@@ -30,3 +42,5 @@ jobs:
           environment-url: ${{ steps.jira-deployment-development.outputs.environment_url }}
           deployment-id: ${{ steps.jira-deployment-development.outputs.deployment_id }}
           state: 'success'
+          ref: '${{ inputs.branch }}'
+          sha: '${{ inputs.sha }}'
